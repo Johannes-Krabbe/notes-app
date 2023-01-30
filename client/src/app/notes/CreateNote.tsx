@@ -4,29 +4,22 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { request } from "../../helper/apiContext";
 
-async function createNotes() {
-    console.log("hello");
-    const res = await request.post("/notes/", {
-        title: "Test Note",
-        content: "This is some content",
-    });
-}
-
 export default function CreateNote() {
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+    const [title, setTitle] = useState<string>("");
+    const [content, setContent] = useState<string>("");
 
     const router = useRouter();
 
-    const create = async () => {
+    const create = async (e: any) => {
+        e.preventDefault();
         try {
             const res = await request.post("/notes/", {
                 title: "test",
-                content: "content",
+                content: "tseartie",
             });
             setContent("");
             setTitle("");
-            router.refresh();
+            // router.refresh();
         } catch (e) {
             console.error(e);
         }
@@ -34,7 +27,7 @@ export default function CreateNote() {
 
     return (
         <>
-            <button onClick={createNotes}>test</button>
+            <button onClick={create}>test</button>
             <form onSubmit={create}>
                 <h3>Create a new Note</h3>
                 <input
@@ -48,7 +41,7 @@ export default function CreateNote() {
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                 />
-                <button type="submit">Create note</button>
+                <input type="submit" value="create Note" />
             </form>
         </>
     );

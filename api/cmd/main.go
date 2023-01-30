@@ -24,6 +24,7 @@ func main() {
     corsConfig.AllowOrigins = []string{clientUrl}
     // config.AllowOrigins = []string{"http://google.com", "http://facebook.com"}
     corsConfig.AllowCredentials = true
+    // corsConfig.AllowMethods = []string{"POST", "GET", "OPTIONS"}
   
     router.Use(cors.New(corsConfig))
 
